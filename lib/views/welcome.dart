@@ -2,6 +2,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:braille_printing/utils/constants.dart';
+import 'package:braille_printing/utils/BrailleConvert.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen();
@@ -145,6 +146,35 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       },
                       child: Text(
                         "Upload Pdf",
+                        style: TextStyle(
+                            color: kButtonText,
+                            fontSize: MediaQuery.of(context).size.width / 30,
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Material(
+                  elevation: 20,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: kButton,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    alignment: FractionalOffset.center,
+                    width: MediaQuery.of(context).size.width / 2.5,
+                    height: 40,
+                    child: TextButton(
+                      onPressed: () {
+                        fnc();
+                      },
+                      child: Text(
+                        "Solve",
                         style: TextStyle(
                             color: kButtonText,
                             fontSize: MediaQuery.of(context).size.width / 30,

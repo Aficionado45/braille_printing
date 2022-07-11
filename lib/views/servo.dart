@@ -4,7 +4,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:braille_printing/views/ocr.dart';
-import 'package:braille_printing/utils/convert.dart';
+import 'package:braille_printing/utils/BrailleConvert.dart';
+import 'package:braille_printing/utils/constants.dart';
 
 class ChatPage extends StatefulWidget {
   final BluetoothDevice server;
@@ -39,6 +40,7 @@ class _ChatPage extends State<ChatPage> {
   bool get isConnected => connection != null && connection.isConnected;
 
   bool isDisconnecting = false;
+  double width;
 
   @override
   void initState() {
@@ -132,6 +134,53 @@ class _ChatPage extends State<ChatPage> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              margin: EdgeInsets.all(20),
+              width: MediaQuery.of(context).size.width / 1.3,
+              height: MediaQuery.of(context).size.height / 13.6,
+              child: TextField(
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Open Sans',
+                  fontSize: 20,
+                ),
+                onChanged: (value) {
+                  if (value.isEmpty)
+                    return null;
+                  else {
+                    String input = value;
+
+                    width = double.parse(input);
+                  }
+                },
+                decoration: InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        // color: Colors.redAccent,
+                        width: 1.0),
+                    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        // color: Colors.redAccent,
+                        width: 2.0),
+                    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                  ),
+                  filled: true,
+                  labelStyle: kSubHeaderStyle,
+                  labelText: "Enter Page Width in cm",
+                ),
+              ),
+            ),
             Flexible(
               child: ListView(
                   padding: const EdgeInsets.all(12.0),
@@ -227,7 +276,7 @@ class _ChatPage extends State<ChatPage> {
 
     if (text.length > 0) {
       try {
-        String converted = convert(text);
+        String converted = convert(text, width);
         print(converted);
         connection.output.add(utf8.encode(converted + "\r\n"));
         await connection.output.allSent;
@@ -250,5 +299,55 @@ class _ChatPage extends State<ChatPage> {
 
   initialvalue(val) {
     return TextEditingController(text: val);
+  }
+
+  String convert(String text, double width) {
+    text.toLowerCase();
+    String converted = "";
+    Map table = {
+      'a': '100000',
+      'b': '110000',
+      'c': '100100',
+      'd': '100110',
+      'e': '100010',
+      'f': '110100',
+      'g': '110110',
+      'h': '110010',
+      'i': '010100',
+      'j': '010110',
+      'k': '101000',
+      'l': '111000',
+      'm': '101100',
+      'n': '101110',
+      'o': '101010',
+      'p': '111100',
+      'q': '111110',
+      'r': '111010',
+      's': '011100',
+      't': '011110',
+      'u': '101001',
+      'v': '111001',
+      'w': '010111',
+      'x': '101101',
+      'y': '101111',
+      'z': '101011',
+      '#': '001111',
+      '1': '100000',
+      '2': '110000',
+      '3': '100100',
+      '4': '100110',
+      '5': '100010',
+      '6': '110100',
+      '7': '110110',
+      '8': '110010',
+      '9': '010100',
+      '0': '010110',
+      ' ': '000000'
+    };
+    for (int i = 0; i < text.length; i++) {
+      converted = converted + table[text[i]];
+    }
+    converted += "98";
+    return converted;
   }
 }
