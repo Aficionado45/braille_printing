@@ -1,3 +1,5 @@
+import 'package:braille_printing/views/pdf.dart';
+import 'package:braille_printing/views/voice.dart';
 import 'package:flutter/material.dart';
 import 'package:braille_printing/views/welcome.dart';
 import 'views/ocr.dart';
@@ -18,6 +20,8 @@ class MyApp extends StatelessWidget {
         'welcome': (context) => WelcomeScreen(),
         'ocr': (context) => OcrCapture(),
         'bluetooth': (context) => Bluetooth(),
+        'pdf': (context) => PdfRead(),
+        'voice': (context) => VoiceText(),
       },
     );
   }

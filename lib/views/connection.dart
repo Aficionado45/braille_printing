@@ -5,8 +5,6 @@ import 'package:braille_printing/views/device.dart';
 import 'package:braille_printing/views/servo.dart';
 
 class SelectBondedDevicePage extends StatefulWidget {
-  /// If true, on page start there is performed discovery upon the bonded devices.
-  /// Then, if they are not avaliable, they would be disabled from the selection.
   final bool checkAvailability;
   final Function onCahtPage;
 
@@ -34,7 +32,6 @@ class _DeviceWithAvailability extends BluetoothDevice {
 class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
   List<_DeviceWithAvailability> devices = List<_DeviceWithAvailability>();
 
-  // Availability
   StreamSubscription<BluetoothDiscoveryResult> _discoveryStreamSubscription;
   bool _isDiscovering;
 
@@ -50,7 +47,6 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
       _startDiscovery();
     }
 
-    // Setup a list of the bonded devices
     FlutterBluetoothSerial.instance
         .getBondedDevices()
         .then((List<BluetoothDevice> bondedDevices) {
@@ -101,7 +97,6 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
 
   @override
   void dispose() {
-    // Avoid memory leak (`setState` after dispose) and cancel discovery
     _discoveryStreamSubscription?.cancel();
 
     super.dispose();
@@ -113,8 +108,6 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
         .map(
           (_device) => BluetoothDeviceListEntry(
             device: _device.device,
-            // rssi: _device.rssi,
-            // enabled: _device.availability == _DeviceAvailability.yes,
             onTap: () {
               widget.onCahtPage(_device.device);
             },
