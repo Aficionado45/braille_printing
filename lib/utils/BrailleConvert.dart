@@ -7,19 +7,7 @@
 import 'package:flutter/material.dart';
 import 'package:basic_utils/basic_utils.dart';
 
-String convert2(String text, int width, int ch_length) {
-  int characters = (width / ch_length).floor();
-  int len = text.length;
-  String converted = "";
-  String line = "";
-  String word = "";
-  int lineNumber = 1;
-  int j;
-
-  return converted;
-}
-
-String convert(String text) {
+String convert2(String text) {
   text.toLowerCase();
   String converted = "";
   Map table = {
@@ -63,24 +51,27 @@ String convert(String text) {
     ' ': '000000'
   };
   for (int i = 0; i < text.length; i++) {
-    converted = converted + table[text[i]];
+    if (text[i] == '#') {
+      converted += '#';
+    }
+    converted += table[text[i]];
   }
-  converted += "98";
   return converted;
 }
 
-void fnc() {
-  String s = "hello world lets print you";
-  int val = 6;
+String convert(String s, double width, int ch_length) {
+  int val = (width / ch_length).floor();
   int cnt = 0;
   String fin_string = "";
   String str = "";
+  var len_str = new List();
+  var len_int = new List();
 
-  List<Pair<String, int>> len;
-  s += " ";
+  s += ' ';
   for (int i = 0; i < s.length; i++) {
     if (s[i] == ' ') {
-      len.add(Pair(str, cnt));
+      len_str.add(str);
+      len_int.add(cnt);
       cnt = 0;
       str = "";
     } else {
@@ -89,12 +80,13 @@ void fnc() {
     }
   }
   cnt = 0;
-  List<String> vec;
+  var vec = new List();
+
   int sp = 0;
   int lines = 0;
-  for (int i = 0; i < len.length; i++) {
-    if (cnt + len[i].cnt + sp > val) {
-      vec = vec.reversed;
+  for (int i = 0; i < len_str.length; i++) {
+    if (cnt + len_int[i] + sp > val) {
+      vec = List.from(vec.reversed);
       String ss = "";
       while (vec.length > 1) {
         ss += vec.last + " ";
@@ -103,7 +95,7 @@ void fnc() {
       ss += vec.last;
       vec.removeLast();
       while (ss.length % val != 0) {
-        ss += '_';
+        ss += ' ';
       }
       lines++;
       if (lines % 2 == 0) ss = StringUtils.reverse(ss);
@@ -113,12 +105,12 @@ void fnc() {
       sp = 0;
       vec.clear();
     }
-    cnt += len[i].cnt;
-    vec.add(len[i].str);
+    cnt += len_int[i];
+    vec.add(len_str[i]);
     sp++;
   }
-  String ss;
-  vec = vec.reversed;
+  String ss = "";
+  vec = List.from(vec.reversed);
   while (vec.length > 1) {
     ss += vec.last + " ";
     vec.removeLast();
@@ -128,10 +120,9 @@ void fnc() {
   lines++;
   if (lines % 2 == 0) {
     while (ss.length % val != 0) {
-      ss += '_';
+      ss += ' ';
     }
   }
   if (lines % 2 == 0) ss = StringUtils.reverse(ss);
-  print(fin_string += ss);
-  // return fin_string += ss;
+  return convert2(fin_string += ss);
 }

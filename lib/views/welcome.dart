@@ -155,35 +155,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Material(
-                  elevation: 20,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: kButton,
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    alignment: FractionalOffset.center,
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    height: 40,
-                    child: TextButton(
-                      onPressed: () {
-                        fnc();
-                      },
-                      child: Text(
-                        "Solve",
-                        style: TextStyle(
-                            color: kButtonText,
-                            fontSize: MediaQuery.of(context).size.width / 30,
-                            fontFamily: 'Open Sans',
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
