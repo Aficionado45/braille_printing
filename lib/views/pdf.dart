@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:braille_printing/utils/constants.dart';
 import 'package:pdf_text/pdf_text.dart';
+import 'package:braille_printing/views/bluetooth.dart';
 
 class PdfRead extends StatefulWidget {
   const PdfRead({Key key}) : super(key: key);
@@ -52,7 +53,13 @@ class _PdfReadState extends State<PdfRead> {
               color: kButtonText,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, 'bluetooth');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Bluetooth(
+                      scannedText: _text,
+                    ),
+                  ));
             },
           ),
           body: Container(

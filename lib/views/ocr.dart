@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:braille_printing/views/bluetooth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,12 +13,10 @@ class OcrCapture extends StatefulWidget {
   State<OcrCapture> createState() => _OcrCaptureState();
 }
 
-String scannedText = "";
-
 class _OcrCaptureState extends State<OcrCapture> {
   bool textScanning = false;
   XFile imageFile;
-
+  String scannedText = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +46,13 @@ class _OcrCaptureState extends State<OcrCapture> {
           color: kButtonText,
         ),
         onPressed: () {
-          Navigator.pushNamed(context, 'bluetooth');
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Bluetooth(
+                  scannedText: scannedText,
+                ),
+              ));
         },
       ),
       body: Center(
@@ -139,12 +144,12 @@ class _OcrCaptureState extends State<OcrCapture> {
                   ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
                 Container(
                   child: Text(
                     scannedText,
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 15),
                   ),
                 )
               ],

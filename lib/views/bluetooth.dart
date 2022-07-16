@@ -4,6 +4,8 @@ import 'package:braille_printing/views/connection.dart';
 import 'package:braille_printing/views/servo.dart';
 
 class Bluetooth extends StatelessWidget {
+  final String scannedText;
+  Bluetooth({Key key, @required this.scannedText}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,9 +28,13 @@ class Bluetooth extends StatelessWidget {
               ),
             );
           } else if (future.connectionState == ConnectionState.done) {
-            return Home();
+            return Home(
+              scannedText: scannedText,
+            );
           } else {
-            return Home();
+            return Home(
+              scannedText: scannedText,
+            );
           }
         },
       ),
@@ -37,6 +43,8 @@ class Bluetooth extends StatelessWidget {
 }
 
 class Home extends StatelessWidget {
+  final String scannedText;
+  Home({Key key, @required this.scannedText}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -67,7 +75,10 @@ class Home extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return ChatPage(server: device);
+                return ChatPage(
+                  server: device,
+                  scannedText: scannedText,
+                );
               },
             ),
           );

@@ -9,14 +9,12 @@ import 'package:braille_printing/utils/constants.dart';
 
 class ChatPage extends StatefulWidget {
   final BluetoothDevice server;
-
-  const ChatPage({this.server});
+  final String scannedText;
+  const ChatPage({this.server, this.scannedText});
 
   @override
   _ChatPage createState() => new _ChatPage();
 }
-
-String initialText = scannedText;
 
 class _Message {
   int whom;
@@ -28,7 +26,6 @@ class _Message {
 class _ChatPage extends State<ChatPage> {
   static final clientID = 0;
   BluetoothConnection connection;
-
   List<_Message> messages = List<_Message>();
   String _messageBuffer = '';
 
@@ -45,7 +42,7 @@ class _ChatPage extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
-    textEditingController.text = initialText;
+    textEditingController.text = widget.scannedText;
 
     BluetoothConnection.toAddress(widget.server.address).then((_connection) {
       print('Connected to the device');
