@@ -7,7 +7,7 @@
 import 'package:flutter/material.dart';
 import 'package:basic_utils/basic_utils.dart';
 
-String convert2(String text) {
+String convert(String text) {
   text.toLowerCase();
   String converted = "";
   Map table = {
@@ -51,15 +51,15 @@ String convert2(String text) {
     ' ': '000000'
   };
   for (int i = 0; i < text.length; i++) {
-    if (text[i] == '#') {
+    /*if (text[i] == '#') {
       converted += '#';
-    }
+    }*/
     converted += table[text[i]];
   }
   return converted;
 }
 
-String convert(String s, double width, int ch_length) {
+/*String convert(String s, double width, int ch_length) {
   int val = (width / ch_length).floor();
   int cnt = 0;
   String fin_string = "";
@@ -126,3 +126,4 @@ String convert(String s, double width, int ch_length) {
   if (lines % 2 == 0) ss = StringUtils.reverse(ss);
   return convert2(fin_string += ss);
 }
+*/

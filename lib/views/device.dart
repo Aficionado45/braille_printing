@@ -9,18 +9,23 @@ class BluetoothDeviceListEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onTap,
-      leading: Icon(Icons.devices),
-      title: Text(device.name ?? "Unknown device"),
-      subtitle: Text(device.address.toString()),
-      trailing: TextButton(
-        child: Text(
-          'Connect',
-          style: TextStyle(color: Color(0xff333333)),
+    print(device.name);
+    if (device.name == 'HC-05') {
+      return ListTile(
+        onTap: onTap,
+        leading: Icon(Icons.devices),
+        title: Text(device.name ?? "Unknown device"),
+        subtitle: Text(device.address.toString()),
+        trailing: TextButton(
+          child: Text(
+            'Connect',
+            style: TextStyle(color: Color(0xff333333)),
+          ),
+          onPressed: onTap,
         ),
-        onPressed: onTap,
-      ),
-    );
+      );
+    } else {
+      return SizedBox.shrink();
+    }
   }
 }

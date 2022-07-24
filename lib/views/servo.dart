@@ -131,7 +131,7 @@ class _ChatPage extends State<ChatPage> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            Container(
+            /*Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
@@ -177,7 +177,7 @@ class _ChatPage extends State<ChatPage> {
                   labelText: "Enter Page Width in cm",
                 ),
               ),
-            ),
+            ),*/
             Flexible(
               child: ListView(
                   padding: const EdgeInsets.all(12.0),
@@ -273,7 +273,8 @@ class _ChatPage extends State<ChatPage> {
 
     if (text.length > 0) {
       try {
-        String converted = convert(text, width, 1);
+        //String converted = convert(text, width, 1);
+        String converted = convert(text);
         print(converted);
         connection.output.add(utf8.encode(converted + "\r\n"));
         await connection.output.allSent;

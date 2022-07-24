@@ -40,7 +40,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           fontFamily: 'Zen')),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
                 Material(
                   elevation: 20,
@@ -69,7 +69,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
                 Material(
                   elevation: 20,
@@ -98,7 +98,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
                 Material(
                   elevation: 20,
@@ -127,7 +127,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
                 Material(
                   elevation: 20,

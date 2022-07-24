@@ -114,6 +114,7 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
           ),
         )
         .toList();
+
     return ListView(
       children: list,
     );
